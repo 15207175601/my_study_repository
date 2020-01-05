@@ -886,7 +886,7 @@ int main()
 	cout << A.climbStairs(44) << endl;
 	return 0;
 }*/
-class Solution {
+/*class Solution {
 public:
 	int minCostClimbingStairs(vector<int>& cost) {
 		int count = 0;
@@ -923,14 +923,142 @@ public:
 		else if (ps + 1 == pe)
 		{
 
-		}*/
+		}
 	}
 };
-int main()
+/*int main()
 {
 	Solution A;
 	int a[4] = { 0,0,1,1 };
 	vector<int>p(a,a+4);
 	cout<<A.minCostClimbingStairs(p);
 	return 0;
+}*/
+
+
+ // Definition for singly-linked list.
+  struct ListNode {
+      int val;
+      ListNode *next;
+      ListNode(int x) : val(x), next(NULL) {}
+  };
+ 
+class Solution {
+public:
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+		ListNode q(0);
+		ListNode* l3 = &q;
+		ListNode* l4=l3;
+		int add = 0;
+		while (l2 != NULL && l1!= NULL)
+		{
+			ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
+			l3->val = l1->val + l2->val+add;
+			add = (l3->val > 9);
+			l3->val %= 10;
+			l3->next = temp;
+			l3 = l3->next;
+			l3->next = NULL;
+			l1 = l1->next;
+			l2 = l2->next;
+		}
+		while (l1 != NULL)
+		{
+			ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
+			l3->val = l1->val + add;
+			add = (l3->val > 9);
+			l3->val %= 10;
+			l3->next = temp;
+			l3 = l3->next;
+			l3->next = NULL;
+			l1 = l1->next;
+		}
+		while (l2 != NULL)
+		{
+			ListNode* temp = (ListNode*)malloc(sizeof(ListNode));
+			l3->val = l2->val + add;
+			add = (l3->val > 9);
+			l3->val %= 10;
+			l3->next = temp;
+			l3 = l3->next;
+			l3->next = NULL;
+			l2 = l2->next;
+		}
+		if (add == 1)
+		{
+			l3->val = add;
+			l3->next = NULL;
+		}
+		else
+		{
+			l3 = NULL;
+		}
+		return l4;
+	}
+};
+
+int main()
+{
+	Solution A;
+	ListNode l1(6),l3(5);
+	l1.next = &l3;
+	ListNode l2(6),l4(2);
+	l2.next = &l4;
+	printf("%d",A.addTwoNumbers(&l1, &l2)->val);
+	return 0;
 }
+
+/*class Solution {
+public:
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+
+		ListNode* pre1, * pre2, * head = l1;
+		int a = 0;
+		int re = 0;
+		bool flag = false;
+		while (l1 != NULL && l2 != NULL)
+		{
+
+			re = (l1->val + l2->val + a) % 10;
+			a = (l1->val + l2->val + a) / 10;
+			l1->val = re;
+			pre2 = l2;
+			pre1 = l1;
+			l1 = l1->next;
+			l2 = l2->next;
+		}
+		if (l2 != NULL)
+		{
+			pre1->next = l2;
+			pre2->next = NULL;
+			flag = true;
+		}
+		while (l1 != NULL)
+		{
+			re = (a + l1->val) % 10;
+			a = (a + l1->val) / 10;
+			l1->val = re;
+			pre1 = l1;
+			l1 = l1->next;
+		}
+		while (l2 != NULL)
+		{
+			re = (a + l2->val) % 10;
+			a = (a + l2->val) / 10;
+			pre2 = l2;
+			l2->val = re;
+			l2 = l2->next;
+		}
+		if (a != 0)
+		{
+			ListNode* last = new ListNode(a);
+			if (flag)
+				pre2->next = last;
+			else
+				pre1->next = last;
+		}
+
+		return head;
+
+	}
+};*/
