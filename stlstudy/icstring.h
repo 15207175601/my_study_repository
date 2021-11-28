@@ -22,7 +22,7 @@ struct ignorecase_traits:public std::char_traits<char>{
     }
     static const char* find(const char*s,std::size_t n,const char&c){
         for(std::size_t i=0;i<n;++i){
-            if(!eq(s[i],c)){
+            if(eq(s[i],c)){
                 return &(s[i]);
             }
         }
