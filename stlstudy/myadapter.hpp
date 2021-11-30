@@ -119,5 +119,7 @@ namespace MySTL{
     struct project2nd:public binary_function<Arg1,Arg2,Arg1>{
         Arg2& operator()(const Arg1&x,const Arg2&y) const{return y;}
     };
+
+    
 }
 #endif //MYADAPTER
